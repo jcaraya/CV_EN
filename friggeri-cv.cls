@@ -50,12 +50,12 @@
 \RequirePackage[quiet]{fontspec}
 \RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
 
-\newfontfamily\bodyfont[]{Helvetica Neue}
-\newfontfamily\thinfont[]{Helvetica Neue UltraLight}
-\newfontfamily\headingfont[]{Helvetica Neue Condensed Bold}
+\newfontfamily\bodyfont[]{HelveticaNeueLTPro-Md}
+\newfontfamily\thinfont[]{HelveticaNeueLTPro-UltLt}
+\newfontfamily\headingfont[]{HelveticaNeueLTPro-BdCn}
 
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Mapping=tex-text, Color=textcolor]{Helvetica Neue Light}
+\setmainfont[Mapping=tex-text, Color=textcolor]{HelveticaNeueLTPro-Lt}
 
 %\setmathfont{XITS Math}
 
@@ -96,16 +96,7 @@
 \newcounter{colorCounter}
 \def\@sectioncolor#1#2#3{%
   {%
-    \color{%
-      \ifcase\value{colorCounter}%
-        blue\or%
-        red\or%
-        orange\or%
-        green\or%
-        purple\or%
-        brown\else%
-        headercolor\fi%
-    } #1#2#3%
+    \color{green} #1#2#3%
   }%
   \stepcounter{colorCounter}%
 }
@@ -152,6 +143,12 @@
     {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
     #4\vspace{\parsep}%
   }\\}
+  
+\newcommand{\entrynodesc}[4]{%
+  #1&\parbox[t]{11.8cm}{%
+    #2\hfill%
+    {\footnotesize\addfontfeature{Color=lightgray} #3}\\
+  }\\} 
 
 
 %%%%%%%%%%%%%%
@@ -287,13 +284,15 @@
 
 \DeclareNameFormat{author}{%
   \small\addfontfeature{Color=lightgray}%
-  \ifblank{#3}{}{#3\space}#1%
+%  \ifblank{#3}{}{#3\space}#1%
   \ifthenelse{\value{listcount}<\value{liststop}}
     {\addcomma\space}
     {}%
 }
 
-\defbibheading{bibheading}[\bibname]{%   \subsubsection*{#1}   \markboth{#1}{#1}
+\defbibheading{bibheading}[\bibname]{%
+   \subsubsection*{#1}
+   \markboth{#1}{#1}
 }
 
 \newcommand{\printbibsection}[2]{
